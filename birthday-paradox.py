@@ -19,6 +19,17 @@ print('''
     to explore this concept. It's not actually a paradox, it's just a surprising result.
 ''')
 
+def getMatch(birthdays):
+    '''Returns the date object of a birthday that occurs more than once in the birthdays list'''
+    if len(birthdays) == len(set(birthdays)):
+        return None # All birthdays are unique, return None
+    
+    # Compare each birthday with every other birthday
+    for a, birthdayA in enumerate(birthdays):
+        for b, birthdayB in enumerate(birthdays[a+1:]):
+            if birthdayA == birthdayB:
+                return birthdayA # Return the matching birthday
+
 # Set up a tuple of month names in order
 MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
           'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
@@ -43,5 +54,10 @@ for i, birthday in enumerate(birthdays):
     dateText = '{} {}'.format(monthName, birthday.day)
     print(dateText, end='')
 print()
-print()                              
+print()
+
+# Determine if there are two birthdays that match
+match = getMatch(birthdays)
+
+
 
