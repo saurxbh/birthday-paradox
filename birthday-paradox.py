@@ -59,5 +59,38 @@ print()
 # Determine if there are two birthdays that match
 match = getMatch(birthdays)
 
+# Display the results
+print('In this simulation, ',end='')
+if match != None:
+    monthName = MONTHS[match.month-1]
+    dateText = '{} {}'.format(monthName, match.day)
+    print('Multiple people have a birthday on ', dateText)
+else:
+    print('There are no matching birthdays.')
+print()
+
+# Run through 100,000 simulations
+print('Generating {} random birthdays 100,000 times...'.format(numBirthdays))
+input('Press Enter to begin...')
+
+print('Let\'s run 100,000 simulations')
+simMatch = 0 # Simulations that will have matching birthdays
+for i in range(100000):
+    # Report on the progress every 10,000 simulations
+    if i % 10000 == 0:
+        print(i, 'simulations run...')
+    birthdays = getBirthdays(numBirthdays)
+    if getMatch(birthdays) != None:
+        simMatch += 1
+print('100,000 simulations run.')
+
+# Display simulation results
+probability = round(simMatch / 100000 * 100, 2)
+print('''
+    out of 100,000 simulations of {} people, there was a 
+    matching birthday in that group {} times. This means that
+    {} people have a {} % chance of having a matching birthday in their group.
+    That's more than you would probably imagine!
+'''.format(numBirthdays,simMatch,numBirthdays,probability))
 
 
